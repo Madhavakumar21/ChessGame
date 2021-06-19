@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Chess game</title>
+
+        <style>
+            h1 {
+                text-align: center;
+                font-size: 50pt;
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+                width: 300pt;
+                border: 5px solid black;
+                border-collapse: collapse;
+            }
+            td {
+                padding: 5px;
+                text-align: center;
+                font-size: 22pt;
+                font-weight: bold;
+            }
+            #CapturedPieces {
+                height: 75pt;
+            }
+            #Board {
+                height: 300pt;
+            }
+            #notClicked {
+                border: 2px solid black;
+            }
+            #clicked {
+                background-color: blue;
+                border: 2px solid black;
+            }
+            .spots {
+                background-color: grey;
+            }
+        </style>
+
+        <script>
+
+            let Flag = 0;
+            let slotNo = 0;
+            let piece = '';
+            let destination = '';
+            let flag = 'notSelected';
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('td').forEach(function(td) {
+                    td.onclick = function() {
+                        if (flag === 'notSelected') {
+                            if (td.innerHTML !== "&nbsp;&nbsp;&nbsp;&nbsp;") {
+                                td.id = 'clicked';
+                                flag = 'selected';
+                            }
+                        } else {
+                            piece = document.querySelector('#clicked').innerHTML;
+                            destination = td.innerHTML;
+                            if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked') {
+                                if (destination in {"♖":0,"♘":1,"♗":2,"♔":3,"♕":4,"♙":5}) {
+                                    slotNo = 2;
+                                } else {
+                                    slotNo = 1;
+                                }
+                                Flag = 0;
+                                document.querySelectorAll(`#slot${slotNo}`).forEach(function(slot) {
+                                    if (slot.innerHTML === "&nbsp;&nbsp;&nbsp;&nbsp;" && Flag === 0) {
+                                        slot.innerHTML = destination;
+                                        Flag = 1;
+                                    }
+                                });
+                            }
+                            document.querySelector('#clicked').innerHTML = '&nbsp&nbsp&nbsp&nbsp';
+                            td.innerHTML = piece;
+                            document.querySelector('#clicked').id = "notClicked";
+                            flag = 'notSelected';
+                        }
+                    }
+                });
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <h1>&#9813CHESS&#9816</h1>
+
+        <table id = "CapturedPieces">
+            <tr>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot1">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+        </table>
+
+        <table id = "Board">
+            <tr>
+                <td id = "notClicked">&#9814</td><td id = "notClicked" class = 'spots'>&#9816</td>
+                <td id = "notClicked">&#9815</td><td id = "notClicked" class = 'spots'>&#9812</td>
+                <td id = "notClicked">&#9813</td><td id = "notClicked" class = 'spots'>&#9815</td>
+                <td id = "notClicked">&#9816</td><td id = "notClicked" class = 'spots'>&#9814</td>
+            </tr>
+            <tr>
+                <td id = "notClicked" class = 'spots'>&#9817</td><td id = "notClicked">&#9817</td>
+                <td id = "notClicked" class = 'spots'>&#9817</td><td id = "notClicked">&#9817</td>
+                <td id = "notClicked" class = 'spots'>&#9817</td><td id = "notClicked">&#9817</td>
+                <td id = "notClicked" class = 'spots'>&#9817</td><td id = "notClicked">&#9817</td>
+            </tr>
+            <tr>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "notClicked" class = 'spots'>&nbsp&nbsp&nbsp&nbsp</td><td id = "notClicked">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "notClicked">&#9823</td><td id = "notClicked" class = 'spots'>&#9823</td>
+                <td id = "notClicked">&#9823</td><td id = "notClicked" class = 'spots'>&#9823</td>
+                <td id = "notClicked">&#9823</td><td id = "notClicked" class = 'spots'>&#9823</td>
+                <td id = "notClicked">&#9823</td><td id = "notClicked" class = 'spots'>&#9823</td>
+            </tr>
+            <tr>
+                <td id = "notClicked" class = 'spots'>&#9820</td><td id = "notClicked">&#9822</td>
+                <td id = "notClicked" class = 'spots'>&#9821</td><td id = "notClicked">&#9818</td>
+                <td id = "notClicked" class = 'spots'>&#9819</td><td id = "notClicked">&#9821</td>
+                <td id = "notClicked" class = 'spots'>&#9822</td><td id = "notClicked">&#9820</td>
+            </tr>
+        </table>
+
+        <table id = "Captured pieces">
+            <tr>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+            <tr>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+                <td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td><td id = "slot2">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+        </table>
+
+    </body>
+</html>
