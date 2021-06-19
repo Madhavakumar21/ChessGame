@@ -48,6 +48,7 @@
             let piece = '';
             let destination = '';
             let flag = 'notSelected';
+            const whitePieces = {"♖":0,"♘":1,"♗":2,"♔":3,"♕":4,"♙":5};
 
             document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('td').forEach(function(td) {
@@ -61,7 +62,7 @@
                             piece = document.querySelector('#clicked').innerHTML;
                             destination = td.innerHTML;
                             if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked') {
-                                if (destination in {"♖":0,"♘":1,"♗":2,"♔":3,"♕":4,"♙":5}) {
+                                if (destination in whitePieces) {
                                     slotNo = 2;
                                 } else {
                                     slotNo = 1;
@@ -74,10 +75,15 @@
                                     }
                                 });
                             }
-                            document.querySelector('#clicked').innerHTML = '&nbsp&nbsp&nbsp&nbsp';
-                            td.innerHTML = piece;
-                            document.querySelector('#clicked').id = "notClicked";
-                            flag = 'notSelected';
+                            if ((td.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!piece in whitePieces) && td.id === 'slot1')) {
+                                document.querySelector('#clicked').innerHTML = '&nbsp&nbsp&nbsp&nbsp';
+                                td.innerHTML = piece;
+                                if (document.querySelector('#clicked').parentElement.parentElement.parentElement.id === // continue ...........) {
+
+                                }
+                                document.querySelector('#clicked').id = "notClicked";
+                                flag = 'notSelected';
+                            }
                         }
                     }
                 });
