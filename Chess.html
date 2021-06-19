@@ -61,7 +61,7 @@
                         } else {
                             piece = document.querySelector('#clicked').innerHTML;
                             destination = td.innerHTML;
-                            if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked') {
+                            if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked' && ((td.parentElement.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!(piece in whitePieces)) && td.id === 'slot1'))) {
                                 if (destination in whitePieces) {
                                     slotNo = 2;
                                 } else {
