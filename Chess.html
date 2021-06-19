@@ -75,13 +75,19 @@
                                     }
                                 });
                             }
-                            if ((td.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!piece in whitePieces) && td.id === 'slot1')) {
+                            if ((td.parentElement.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!(piece in whitePieces)) && td.id === 'slot1')) {
+                                console.log("into moving task");
                                 document.querySelector('#clicked').innerHTML = '&nbsp&nbsp&nbsp&nbsp';
                                 td.innerHTML = piece;
-                                if (document.querySelector('#clicked').parentElement.parentElement.parentElement.id === // continue ...........) {
-
+                                if (document.querySelector('#clicked').parentElement.parentElement.parentElement.id === "Board") {
+                                    document.querySelector('#clicked').id = "notClicked";
+                                } else {
+                                    if (piece in whitePieces) {
+                                        document.querySelector('#clicked').id = "slot2";
+                                    } else {
+                                        document.querySelector('#clicked').id = "slot1";
+                                    }
                                 }
-                                document.querySelector('#clicked').id = "notClicked";
                                 flag = 'notSelected';
                             }
                         }
