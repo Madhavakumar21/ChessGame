@@ -6,11 +6,17 @@
         <title>Chess game</title>
 
         <style>
+            body {
+                background-color: rgb(94, 27, 15);
+            }
             h1 {
                 text-align: center;
+                font-family: Georgia, 'Times New Roman', Times, serif;
                 font-size: 50pt;
+                color: wheat;
             }
             table {
+                background-color: sandybrown;
                 margin-left: auto;
                 margin-right: auto;
                 width: 300pt;
@@ -37,7 +43,7 @@
                 border: 2px solid black;
             }
             .spots {
-                background-color: grey;
+                background-color: rgb(139, 28, 0);
             }
         </style>
 
@@ -61,23 +67,25 @@
                         } else {
                             piece = document.querySelector('#clicked').innerHTML;
                             destination = td.innerHTML;
-                            if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked' && ((td.parentElement.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!(piece in whitePieces)) && td.id === 'slot1'))) {
-                                if (destination in whitePieces) {
-                                    slotNo = 2;
-                                } else {
-                                    slotNo = 1;
-                                }
-                                Flag = 0;
-                                document.querySelectorAll(`#slot${slotNo}`).forEach(function(slot) {
-                                    if (slot.innerHTML === "&nbsp;&nbsp;&nbsp;&nbsp;" && Flag === 0) {
-                                        slot.innerHTML = destination;
-                                        Flag = 1;
-                                    }
-                                });
-                            }
-                            if ((td.parentElement.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!(piece in whitePieces)) && td.id === 'slot1')) {
-                                console.log("into moving task");
+                            if ((td.parentElement.parentElement.parentElement.id === 'Board') || (piece in whitePieces && td.id === 'slot2') || ((!(piece in whitePieces)) && td.id === 'slot1') || (td.id === 'clicked')) {
                                 document.querySelector('#clicked').innerHTML = '&nbsp&nbsp&nbsp&nbsp';
+                                if (destination !== "&nbsp;&nbsp;&nbsp;&nbsp;" && td.id !== 'clicked') {
+                                    if (destination in whitePieces) {
+                                        slotNo = 2;
+                                    } else {
+                                        slotNo = 1;
+                                    }
+                                    Flag = 0;
+                                    document.querySelectorAll(`#slot${slotNo}`).forEach(function(slot) {
+                                        if (slot.innerHTML === "&nbsp;&nbsp;&nbsp;&nbsp;" && Flag === 0) {
+                                            slot.innerHTML = destination;
+                                            Flag = 1;
+                                        }
+                                    });
+                                    if (Flag === 0) {
+                                        document.querySelector('#clicked').innerHTML = destination;
+                                    }
+                                }
                                 td.innerHTML = piece;
                                 if (document.querySelector('#clicked').parentElement.parentElement.parentElement.id === "Board") {
                                     document.querySelector('#clicked').id = "notClicked";
